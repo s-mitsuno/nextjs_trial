@@ -2,8 +2,16 @@ import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Image from "next/image";
+import React, { useState } from "react";
 
 const Home: NextPage = () => {
+  const [isModal, setIsModal] = useState(false);
+  const contentClassname = isModal ? styles.ModalContainer : "";
+
+  const mouseEnterLeave = () => {
+    setIsModal(!isModal);
+  };
+
   return (
     <>
       <Head>
@@ -42,11 +50,15 @@ const Home: NextPage = () => {
           <section className={styles.section}>
             <h2 className={styles.h2}>導入実績</h2>
             <ol className={styles.ol}>
-              <li className={styles.li}>
+              <li
+                className={styles.li}
+                onMouseEnter={mouseEnterLeave}
+                onMouseLeave={mouseEnterLeave}
+              >
                 <Image
                   width={300}
                   height={300}
-                  className={styles.homeImg}
+                  className={`${styles.homeImg} ${contentClassname}`}
                   src="/images/freeImage/rpa2.jpg"
                   alt="PHOTO"
                 />
@@ -55,11 +67,15 @@ const Home: NextPage = () => {
                   RPA（ロボティック・プロセス・オートメーション）を用いて作業の自動化を行う
                 </p>
               </li>
-              <li className={styles.li}>
+              <li
+                className={styles.li}
+                onMouseEnter={mouseEnterLeave}
+                onMouseLeave={mouseEnterLeave}
+              >
                 <Image
                   width={300}
                   height={300}
-                  className={styles.homeImg}
+                  className={`${styles.homeImg} ${contentClassname}`}
                   src="/images/freeImage/ai.jpg"
                   alt="PHOTO"
                 />
@@ -69,11 +85,15 @@ const Home: NextPage = () => {
                 </p>
               </li>
 
-              <li className={styles.li}>
+              <li
+                className={styles.li}
+                onMouseEnter={mouseEnterLeave}
+                onMouseLeave={mouseEnterLeave}
+              >
                 <Image
                   width={300}
                   height={300}
-                  className={styles.homeImg}
+                  className={`${styles.homeImg} ${contentClassname}`}
                   src="/images/freeImage/eye.jpg"
                   alt="PHOTO"
                 />
