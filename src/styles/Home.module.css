@@ -1,0 +1,159 @@
+/* ヘッダーのグループ */
+
+.header {
+  background-color: #2e3a3e;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.h1 {
+  margin: 0 auto;
+  max-width: 960px;
+
+  /* flexbox */
+  display: flex;
+  align-items: center;
+
+  padding-left: 10px;
+}
+
+/* ヒーローイメージの小部品 */
+.parent_hero {
+  position: relative;
+  width: 100%;
+  height: auto;
+  /* height: 640px; */
+}
+
+/* メインコンテンツのグループ */
+/* 第一コンテンツ */
+.section {
+  margin: 40px auto 0;
+  max-width: 960px;
+}
+
+.section:first-child {
+  margin: 60px auto 0;
+}
+
+.h2 {
+  font-family: "Yu Mincho", YuMincho, "Hiragino Mincho Pro", serif;
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.ol {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  padding-left: 0;
+}
+
+.li {
+  flex-basis: 300px;
+  list-style-type: none;
+}
+
+.h3 {
+  font-size: 2rem;
+}
+
+.section_ol_li_p {
+  margin-bottom: 60px;
+  line-height: 1.6;
+  font-size: 2rem;
+}
+
+.section_div {
+  background-color: #eeeeee;
+  height: 380px;
+  max-width: 960px;
+}
+
+/* 第二コンテンツ */
+.h22 {
+  font-family: "Yu Mincho", YuMincho, "Hiragino Mincho Pro", serif;
+  font-size: 4rem;
+  font-weight: 400;
+  margin-top: 70px;
+  text-align: center;
+}
+
+.flex_article {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.flex_item {
+  width: 100%;
+}
+
+@media (min-width: 376px) {
+  .flex_item {
+    width: calc(100% / 2);
+  }
+}
+
+@media (min-width: 640px) {
+  .flex_item {
+    width: calc(100% / 3);
+  }
+}
+
+@media (min-width: 769px) {
+  .flex_item {
+    width: calc(100% / 4);
+  }
+}
+
+.flex_img {
+  text-align: center;
+}
+
+.h32 {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.tlImg {
+  max-width: 90%;
+}
+
+/* フッターのグループ */
+.footer {
+  background-color: #2e3a3e;
+  color: #ffffff;
+  max-width: 1280px;
+  height: 360px;
+  margin: 100px auto 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.footer_p,
+.footer_ul {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.footer_p {
+  font-family: "Yu Mincho", YuMincho, "Hiragino Mincho Pro", serif;
+  font-size: 3.6rem;
+}
+
+.footer_ul {
+  list-style-type: none;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  margin-top: 16px;
+}
+
+.footer_ul_li_span {
+  margin-right: 16px;
+}
