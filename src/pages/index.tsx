@@ -30,7 +30,7 @@ const Home: NextPage = () => {
               height="60px"
               width="300px"
               className={styles.img}
-              src="/images/team_logo.png"
+              src="/images/freeImage/logo2.png"
               alt="ロゴ"
             />
           </h1>
