@@ -3,7 +3,6 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Image from "next/image";
 import React, { useState } from "react";
-import useSWR from "swr";
 
 const Home: NextPage = () => {
   const [isModal, setIsModal] = useState(false);
@@ -12,16 +11,6 @@ const Home: NextPage = () => {
   const mouseEnterLeave = () => {
     setIsModal(!isModal);
   };
-
-  const { data, error } = useSWR("/api/getIntroResData", () =>
-    fetch("/api/getIntroResData")
-  );
-
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
-  // データをレンダリングする
-  console.log(data.body);
 
   return (
     <>
