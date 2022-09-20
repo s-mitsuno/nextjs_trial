@@ -2,26 +2,51 @@ import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Image from "next/image";
-import React, { useState } from "react";
 import useSWR from "swr";
+import { GetServerSideProps } from "next";
+import { useState, useEffect } from "react";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import { useRouter } from "next/router";
 
-const Home: NextPage = () => {
-  const [isModal, setIsModal] = useState(false);
-  const contentClassname = isModal ? styles.ModalContainer : "";
+type Props = {
+  title?: string;
+  imagePath?: string;
+  description?: string;
+};
 
-  const mouseEnterLeave = () => {
-    setIsModal(!isModal);
+type ToolsInfoData = {
+  title: string;
+  imagePath: string;
+};
+
+const Home: NextPage = (props: any) => {
+  // サーバーサイドでのAPI呼び出し※propsにデータが入っている
+  console.log(JSON.stringify(props));
+  const resultdata: Props[] = props["result"];
+
+  // クライアントでのAPI呼び出し
+  const router = useRouter();
+  const [toolsdata, settoolsdata] = useState<ToolsInfoData[]>([]);
+  const [status, setStatus] = useState<number | null>(null);
+  const host = router.basePath;
+  const options: AxiosRequestConfig = {
+    url: `${router.basePath}/api/getToolsData`,
+    method: "GET",
   };
 
-  const { data, error } = useSWR("/api/getIntroResData", () =>
-    fetch("/api/getIntroResData")
-  );
-
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
-  // データをレンダリングする
-  console.log(data.body);
+  useEffect(() => {
+    axios(options)
+      .then((res: AxiosResponse<ToolsInfoData[]>) => {
+        const { data, status } = res;
+        settoolsdata(data);
+        setStatus(status);
+        console.log(data);
+      })
+      .catch((e: AxiosError<{ error: string }>) => {
+        // エラー処理
+        console.log(e.message);
+      });
+  }, []);
 
   return (
     <>
@@ -61,97 +86,24 @@ const Home: NextPage = () => {
           <section className={styles.section}>
             <h2 className={styles.h2}>導入実績</h2>
             <ol className={styles.ol}>
-              <li
-                className={styles.li}
-                onMouseEnter={mouseEnterLeave}
-                onMouseLeave={mouseEnterLeave}
-              >
-                <Image
-                  width={300}
-                  height={300}
-                  className={`${styles.homeImg} ${contentClassname}`}
-                  src="/images/freeImage/rpa2.jpg"
-                  alt="PHOTO"
-                />
-                <h3 className={styles.h3}>RPA</h3>
-                <p className={styles.section_ol_li_p}>
-                  RPA（ロボティック・プロセス・オートメーション）を用いて作業の自動化を行う
-                </p>
-              </li>
-              <li
-                className={styles.li}
-                onMouseEnter={mouseEnterLeave}
-                onMouseLeave={mouseEnterLeave}
-              >
-                <Image
-                  width={300}
-                  height={300}
-                  className={`${styles.homeImg} ${contentClassname}`}
-                  src="/images/freeImage/ai.jpg"
-                  alt="PHOTO"
-                />
-                <h3 className={styles.h3}>AI</h3>
-                <p className={styles.section_ol_li_p}>
-                  AI技術を用いて、社内作業の効率化を図る。
-                </p>
-              </li>
-
-              <li
-                className={styles.li}
-                onMouseEnter={mouseEnterLeave}
-                onMouseLeave={mouseEnterLeave}
-              >
-                <Image
-                  width={300}
-                  height={300}
-                  className={`${styles.homeImg} ${contentClassname}`}
-                  src="/images/freeImage/eye.jpg"
-                  alt="PHOTO"
-                />
-                <h3 className={styles.h3}>データサイエンス</h3>
-                <p className={styles.section_ol_li_p}>
-                  データを分析し、未来予測を行う
-                </p>
-              </li>
-              <li className={styles.li}>
-                <Image
-                  width={300}
-                  height={300}
-                  className={styles.homeImg}
-                  src="/images/freeImage/graph.jpg"
-                  alt="PHOTO"
-                />
-                <h3 className={styles.h3}>visualization</h3>
-                <p className={styles.section_ol_li_p}>
-                  visualization（見える化とは）
-                </p>
-              </li>
-              <li className={styles.li}>
-                <Image
-                  width={300}
-                  height={300}
-                  className={styles.homeImg}
-                  src="/images/freeImage/iot2.jpg"
-                  alt="PHOTO"
-                />
-                <h3 className={styles.h3}>IOT</h3>
-                <p className={styles.section_ol_li_p}>
-                  IOT機器を用い社内の効率化を図る
-                </p>
-              </li>
-              <li className={styles.li}>
-                <Image
-                  width={300}
-                  height={300}
-                  className={styles.homeImg}
-                  src="/images/freeImage/vr.jpg"
-                  alt="PHOTO"
-                />
-                <h3 className={styles.h3}>XR(VR/AR/MR)</h3>
-                <p className={styles.section_ol_li_p}>
-                  仮想現実、拡張現実の可能性を追求していことにより、社内の効率化に繋げる。
-                </p>
-              </li>
+              {resultdata.map((value) => {
+                //console.log(value.title);
+                return (
+                  <li key={value.title} className={styles.li}>
+                    <Image
+                      width={300}
+                      height={300}
+                      className={`${styles.homeImg}`}
+                      src={`${value.imagePath}`}
+                      alt="PHOTO"
+                    />
+                    <h3 className={styles.h3}>{value.title}</h3>
+                    <p className={styles.section_ol_li_p}>
+                      {value.description}
+                    </p>
+                  </li>
+                );
+              })}
             </ol>
           </section>
 
@@ -159,54 +111,22 @@ const Home: NextPage = () => {
           <article className={styles.article}>
             <h2 className={styles.h22}>operational efficiency tools</h2>
             <div className={styles.flex_article}>
-              <section className={styles.flex_item}>
-                <p className={styles.flex_img}>
-                  <Image
-                    width={220}
-                    height={220}
-                    className={styles.tlImg}
-                    src="/images/freeImage/wb.jpg"
-                    alt="PHOTO"
-                  />
-                </p>
-                <h3 className={styles.h32}>ホワイトボード</h3>
-              </section>
-              <section className={styles.flex_item}>
-                <p className={styles.flex_img}>
-                  <Image
-                    width={220}
-                    height={220}
-                    className={styles.tlImg}
-                    src="/images/freeImage/kb.jpg"
-                    alt="PHOTO"
-                  />
-                </p>
-                <h3 className={styles.h32}>カンバンボード</h3>
-              </section>
-              <section className={styles.flex_item}>
-                <p className={styles.flex_img}>
-                  <Image
-                    width={220}
-                    height={220}
-                    className={styles.tlImg}
-                    src="/images/freeImage/chat.jpg"
-                    alt="PHOTO"
-                  />
-                </p>
-                <h3 className={styles.h32}>チャットツール</h3>
-              </section>
-              <section className={styles.flex_item}>
-                <p className={styles.flex_img}>
-                  <Image
-                    width={220}
-                    height={220}
-                    className={styles.tlImg}
-                    src="/images/freeImage/dc.jpg"
-                    alt="PHOTO"
-                  />
-                </p>
-                <h3 className={styles.h32}>docker</h3>
-              </section>
+              {toolsdata.map(({ title, imagePath }) => {
+                return (
+                  <section key={title} className={styles.flex_item}>
+                    <p className={styles.flex_img}>
+                      <Image
+                        width={220}
+                        height={220}
+                        className={styles.tlImg}
+                        src={`${imagePath}`}
+                        alt="PHOTO"
+                      />
+                    </p>
+                    <h3 className={styles.h32}>{title}</h3>
+                  </section>
+                );
+              })}
             </div>
           </article>
         </div>
@@ -241,3 +161,28 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const host = context.req.headers.host || "localhost:3000";
+    const protocol = /^localhost/.test(host) ? "http" : "https";
+    const result = await fetch(
+      `${protocol}://${host}/api/getIntroductResData`
+    ).then((data) => {
+      return data.json();
+    });
+    return {
+      props: {
+        result,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    console.log("######ERROR#######");
+    return {
+      props: {
+        result: [],
+      },
+    };
+  }
+};
