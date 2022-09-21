@@ -2,20 +2,51 @@ import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Image from "next/image";
+import useSWR from "swr";
 import { GetServerSideProps } from "next";
-import IntroductResData from "../compornents/home/introductResData";
-import ToolsData from "../compornents/home/toolsData";
+import { useState, useEffect } from "react";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import { useRouter } from "next/router";
 
-type IntroductResultData = {
+type Props = {
   title?: string;
   imagePath?: string;
   description?: string;
 };
 
+type ToolsInfoData = {
+  title: string;
+  imagePath: string;
+};
+
 const Home: NextPage = (props: any) => {
   // サーバーサイドでのAPI呼び出し※propsにデータが入っている
   console.log(JSON.stringify(props));
-  const resultdata: IntroductResultData[] = props["result"];
+  const resultdata: Props[] = props["result"];
+
+  // クライアントでのAPI呼び出し
+  const router = useRouter();
+  const [toolsdata, settoolsdata] = useState<ToolsInfoData[]>([]);
+  const [status, setStatus] = useState<number | null>(null);
+  const host = router.basePath;
+  const options: AxiosRequestConfig = {
+    url: `${router.basePath}/api/getToolsData`,
+    method: "GET",
+  };
+
+  useEffect(() => {
+    axios(options)
+      .then((res: AxiosResponse<ToolsInfoData[]>) => {
+        const { data, status } = res;
+        settoolsdata(data);
+        setStatus(status);
+        console.log(data);
+      })
+      .catch((e: AxiosError<{ error: string }>) => {
+        // エラー処理
+        console.log(e.message);
+      });
+  }, []);
 
   return (
     <>
@@ -52,10 +83,52 @@ const Home: NextPage = (props: any) => {
 
         <div>
           {/* 第一コンテンツ */}
-          <IntroductResData data={resultdata} />
+          <section className={styles.section}>
+            <h2 className={styles.h2}>導入実績</h2>
+            <ol className={styles.ol}>
+              {resultdata.map((value) => {
+                //console.log(value.title);
+                return (
+                  <li key={value.title} className={styles.li}>
+                    <Image
+                      width={300}
+                      height={300}
+                      className={`${styles.homeImg}`}
+                      src={`${value.imagePath}`}
+                      alt="PHOTO"
+                    />
+                    <h3 className={styles.h3}>{value.title}</h3>
+                    <p className={styles.section_ol_li_p}>
+                      {value.description}
+                    </p>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
 
           {/* 第２コンテンツ */}
-          <ToolsData />
+          <article className={styles.article}>
+            <h2 className={styles.h22}>operational efficiency tools</h2>
+            <div className={styles.flex_article}>
+              {toolsdata.map(({ title, imagePath }) => {
+                return (
+                  <section key={title} className={styles.flex_item}>
+                    <p className={styles.flex_img}>
+                      <Image
+                        width={220}
+                        height={220}
+                        className={styles.tlImg}
+                        src={`${imagePath}`}
+                        alt="PHOTO"
+                      />
+                    </p>
+                    <h3 className={styles.h32}>{title}</h3>
+                  </section>
+                );
+              })}
+            </div>
+          </article>
         </div>
 
         {/* フッターの領域 */}
