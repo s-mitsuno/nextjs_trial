@@ -6,6 +6,7 @@ import IntroductResData from "../compornents/home/introductResData";
 import ToolsData from "../compornents/home/toolsData";
 import HomeHeader from "../compornents/home/homeHeader";
 import HomeFooter from "../compornents/home/homeFooter";
+import Script from "next/script";
 
 type IntroductResultData = {
   title?: string;
@@ -24,11 +25,12 @@ const Home: NextPage = (props: any) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>タイトル</title>
-        {/* <link
+      </Head>
+      <Script src="http://threejs.org/build/three.min.js" />
+      {/* <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
         /> */}
-      </Head>
       <main>
         {/* ヘッダーの領域 */}
         <HomeHeader />
