@@ -24,10 +24,10 @@ const Home: NextPage = (props: any) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>タイトル</title>
-        <link
+        {/* <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        />
+        /> */}
       </Head>
       <main>
         {/* ヘッダーの領域 */}
