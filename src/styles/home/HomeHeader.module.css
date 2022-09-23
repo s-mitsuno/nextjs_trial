@@ -1,7 +1,6 @@
 /* ヘッダーのグループ */
-
 .header {
-  background-color: #2e3a3e;
+  background-color: #2e3e36;
   margin: 0 auto;
   max-width: 1280px;
 }
@@ -13,8 +12,45 @@
   /* flexbox */
   display: flex;
   align-items: center;
-
   padding-left: 10px;
+}
+
+.ul {
+  overflow: hidden;
+  list-style: none;
+  margin: 0 auto;
+  /* height: 60px; */
+  z-index: 20;
+}
+
+.li {
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+}
+
+.btn2 {
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  color: white;
+  /* font-family: "Yu Mincho", YuMincho, "Hiragino Mincho Pro", serif; */
+  font-family: "YuKyokasho Yoko", "Helvetica Neue", "Yu Gothic Medium", YuGothic,
+    Verdana, Meiryo, sans-serif;
+  font-weight: normal;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn4 {
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  color: white;
+  /* font-family: "Yu Mincho", YuMincho, "Hiragino Mincho Pro", serif; */
+  font-family: "YuKyokasho Yoko", "Helvetica Neue", "Yu Gothic Medium", YuGothic,
+    Verdana, Meiryo, sans-serif;
+  font-weight: normal;
+  text-decoration: none;
+  display: inline-block;
 }
 
 /* ヒーローイメージの小部品 */
@@ -23,10 +59,117 @@
   width: 100%;
   height: auto;
   margin-bottom: -4px;
-  /* height: 640px; */
+  height: 300px;
+}
+
+@media (min-width: 376px) {
+  .parent_hero {
+    height: 300px;
+  }
+}
+
+@media (min-width: 640px) {
+  .parent_hero {
+    height: 400px;
+  }
+}
+
+@media (min-width: 769px) {
+  .parent_hero {
+    height: 640px;
+  }
 }
 
 .img {
   vertical-align: bottom;
-  padding-bottom: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.imgv {
+  vertical-align: bottom;
+  height: 100%;
+  width: 100%;
+}
+
+.hero_text {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  position: absolute;
+  font-family: "Yu Mincho", YuMincho, "Hiragino Mincho Pro", serif;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.hero_main_text {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.hero_sub_text {
+  font-size: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.hero_button {
+  font-size: 1rem;
+}
+
+@media (min-width: 376px) {
+  .hero_main_text {
+    font-size: 2.3rem;
+    color: white;
+    text-align: center;
+  }
+
+  .hero_sub_text {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+  }
+
+  .hero_button {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero_main_text {
+    font-size: 3.5rem;
+    color: white;
+    text-align: center;
+  }
+
+  .hero_sub_text {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+  }
+
+  .hero_button {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .hero_main_text {
+    font-size: 4.5rem;
+    color: white;
+    text-align: center;
+  }
+
+  .hero_sub_text {
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+  }
+  .hero_button {
+    font-size: 2.5rem;
+  }
 }
