@@ -3,6 +3,7 @@ import styles from "../../styles/home/ToolsData.module.css";
 import { useState, useEffect } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { useRouter } from "next/router";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 type ToolsInfoData = {
   title: string;
@@ -36,21 +37,25 @@ const ToolsData = () => {
   return (
     <div>
       <article className={styles.article}>
-        <h2 className={styles.h22}>operational efficiency tools</h2>
+        <AnimationOnScroll animateIn="animate__pulse">
+          <h2 className={styles.h22}>operational efficiency tools</h2>
+        </AnimationOnScroll>
         <div className={styles.flex_article}>
           {toolsdata.map(({ title, imagePath }) => {
             return (
               <section key={title} className={styles.flex_item}>
-                <p className={styles.flex_img}>
-                  <Image
-                    width={220}
-                    height={220}
-                    className={styles.tlImg}
-                    src={`${imagePath}`}
-                    alt="PHOTO"
-                  />
-                </p>
-                <h3 className={styles.h32}>{title}</h3>
+                <AnimationOnScroll animateIn="animate__pulse">
+                  <p className={styles.flex_img}>
+                    <Image
+                      width={220}
+                      height={220}
+                      className={styles.tlImg}
+                      src={`${imagePath}`}
+                      alt="PHOTO"
+                    />
+                  </p>
+                  <h3 className={styles.h32}>{title}</h3>
+                </AnimationOnScroll>
               </section>
             );
           })}

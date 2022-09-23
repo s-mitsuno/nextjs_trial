@@ -2,6 +2,7 @@ import Script from "next/script";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "../../styles/home/HomeHeader.module.css";
 import Image from "next/image";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 type Props = {};
 
@@ -58,12 +59,7 @@ const HomeHeader = (props: Props) => {
             </li>
             <li className={styles.li}>
               <a href="#" className={styles.btn4}>
-                部署沿革
-              </a>
-            </li>
-            <li className={styles.li}>
-              <a href="#" className={styles.btn4}>
-                部長挨拶
+                チーム沿革
               </a>
             </li>
             <li className={styles.li}>
@@ -73,7 +69,12 @@ const HomeHeader = (props: Props) => {
             </li>
             <li className={styles.li}>
               <a href="#" className={styles.btn4}>
-                お知らせ
+                イベント
+              </a>
+            </li>
+            <li className={styles.li}>
+              <a href="#" className={styles.btn4}>
+                関連リンク
               </a>
             </li>
             <li className={styles.li}>
@@ -87,7 +88,9 @@ const HomeHeader = (props: Props) => {
         <div className={styles.parent_hero}>
           <div id="vantael" className={styles.imgv} />
           <div className={styles.hero_text}>
+            {/* <AnimationOnScroll animateIn="animate__jello"> */}
             <div className={styles.hero_main_text}>NaiSei Ka Tanoshi</div>
+            {/* </AnimationOnScroll> */}
             <div className={styles.hero_sub_text}>
               enjoy system engineer life !!
             </div>
