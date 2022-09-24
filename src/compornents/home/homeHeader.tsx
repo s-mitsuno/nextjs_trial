@@ -10,16 +10,6 @@ const HomeHeader = (props: Props) => {
   return (
     <div>
       <Script
-        id="three"
-        src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"
-        strategy="beforeInteractive"
-      />
-      <Script
-        id="vanta"
-        src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"
-        strategy="beforeInteractive"
-      />
-      <Script
         id="vantael"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
