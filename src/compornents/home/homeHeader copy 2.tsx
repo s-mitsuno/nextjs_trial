@@ -31,58 +31,65 @@ const HomeHeader = (props: Props) => {
           `,
         }}
       ></Script>
+
       <header className={styles.header}>
-        <div className={styles.header_contents}>
-          <h1 className={styles.h1}>
-            <a className={styles.nav_link} href="">
-              <Image
-                height="40px"
-                width="150px"
-                className={styles.img}
-                src="/images/teamlogo2.png"
-                alt="ロゴ"
-              />
-            </a>
-          </h1>
+        <h1 className={styles.h1}>
           <div className={styles.responsive_btn}>
             <div className={styles.menu_line}></div>
             <div className={styles.menu_line}></div>
             <div className={styles.menu_line}></div>
           </div>
-          <nav className={styles.header_nav}>
-            <ul className={styles.header_nav_lists}>
+          <nav className={styles.nav}>
+            <ul className={styles.ul}>
               <li className={styles.li}>
-                <a className={styles.nav_link} href="">
+                <a href="#" className={styles.btn2}>
+                  Home
+                </a>
+                {/* <Image
+                height="30px"
+                width="30px"
+                className={styles.btn2}
+                src="/images/freeImage/logoparams.png"
+                alt="ロゴ"
+              /> */}
+              </li>
+              <li className={styles.li}>
+                <a href="#" className={styles.btn4}>
                   チーム沿革
                 </a>
               </li>
               <li className={styles.li}>
-                <a className={styles.nav_link} href="">
+                <a href="#" className={styles.btn4}>
                   課長挨拶
                 </a>
               </li>
               <li className={styles.li}>
-                <a className={styles.nav_link} href="">
+                <a href="#" className={styles.btn4}>
                   イベント
                 </a>
               </li>
               <li className={styles.li}>
-                <a className={styles.nav_link} href="">
+                <a href="#" className={styles.btn4}>
+                  関連リンク
+                </a>
+              </li>
+              <li className={styles.li}>
+                <a href="#" className={styles.btn4}>
                   お問い合わせ
                 </a>
               </li>
             </ul>
           </nav>
-        </div>
+        </h1>
 
         <div className={styles.parent_hero}>
           <div id="vantael" className={styles.imgv} />
           <div className={styles.hero_text}>
             {/* <AnimationOnScroll animateIn="animate__jello"> */}
-            <div className={styles.hero_main_text}>Evolving with ICT</div>
+            <div className={styles.hero_main_text}>NaiSei Ka Tanoshi</div>
             {/* </AnimationOnScroll> */}
             <div className={styles.hero_sub_text}>
-              Enjoy system engineer life !!
+              enjoy system engineer life !!
             </div>
             <button className={styles.hero_button}>ご相談・お問い合わせ</button>
           </div>
